@@ -1,0 +1,25 @@
+name: Test Java on macOS-15 Runners #12520
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test-java:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-15, macos-15-arm64]
+        java-version: [17, 21]
+        distribution: [temurin, zulu]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Java ${{ matrix.java-version }} (${{ matrix.distribution }})
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: ${{ matrix.distribution }}
+      - name: Show Java version
+        run: java -version
