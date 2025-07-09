@@ -1,4 +1,4 @@
-name: Setup Java Workflow
+name: check java 7 support
 
 on:
   push:
